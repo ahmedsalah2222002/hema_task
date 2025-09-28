@@ -1,0 +1,15 @@
+
+.handle-card{
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  cursor: pointer;
+}
+
+.delete-icon{
+  color: #6c757d; /* رمادي افتراضي */
+  cursor: pointer;
+  transition: red 0.3s ease;
+}
+
+ .delete-icon:hover{
+  color: red;
+ }

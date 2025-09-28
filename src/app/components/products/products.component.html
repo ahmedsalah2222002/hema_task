@@ -1,0 +1,68 @@
+<div class="container mt-5 mx-auto">
+
+  <!-- زرار إضافة منتج -->
+  <div class="text-center">
+    <button class="btn btn-primary rounded-4 p-3 fs-4 mb-5">
+      ➕ Add Product
+    </button>
+  </div>
+
+  <!-- الفورم -->
+  <form class="p-4 border w-50 mx-auto rounded-4 shadow bg-light"
+    (ngSubmit)="addProduct(name.value, price.value, image.value)">
+    <!-- اسم المنتج -->
+    <div class="mb-3">
+      <label for="name" class="form-label fs-5"> Product Name: </label>
+      <input type="text" id="name" #name class="form-control form-control-lg" placeholder="enter youe name">
+    </div>
+
+    <!-- سعر المنتج -->
+    <div class="mb-3">
+      <label for="price" class="form-label fs-5">Price: </label>
+      <input type="number" id="price" #price class="form-control form-control-lg" placeholder=" enter your price">
+    </div>
+
+    <!-- رابط الصورة -->
+    <div class="mb-3">
+      <label for="image" class="form-label fs-5"> Image: </label>
+      <input type="file" id="image" multiple accept="image/*" #image (change)="onFileSelected($event)"
+        class="form-control form-control-lg">
+    </div>
+
+    <!-- زرار الحفظ -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-success btn-lg mt-3 text-center rounded-4 px-5">
+        Save Product
+      </button>
+    </div>
+
+  </form>
+
+  <!-- عرض الكروت -->
+  <div class="cards mt-5 d-grid gap-4 handle-card" *ngIf="products.length > 0; else noProducts">
+    <div class="card shadow-sm border-0 mt-3 rounded-4 " *ngFor="let prod of products">
+      <!-- الايقونات-->
+      <div class="d-flex justify-content-end fs-5 gap-3 p-2">
+        <i class="fa-solid fa-heart text-danger"></i>
+        <i class="fa-solid fa-trash delete-icon" (click)="deleteProduct(prod.id)"></i>
+        <i class="fa-solid fa-pen text-primary"></i>
+      </div>
+
+      <a [routerLink]="['/prod', prod.id]">
+        <img [src]="'http://localhost:3000' + prod.image" class="card-img-top rounded-top-4" alt="{{prod.name}}">
+      </a>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{prod.name}}</h5>
+        <p class="card-text text-muted">السعر: {{prod.price}} جنيه</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- لا توجد منتجات -->
+  <ng-template #noProducts>
+    <div class="text-center mt-5">
+      <h5 class="text-muted">🚫 لا توجد منتجات حاليا </h5>
+    </div>
+  </ng-template>
+
+</div>
