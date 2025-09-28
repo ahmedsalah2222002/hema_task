@@ -27,7 +27,7 @@ export class ProductDetailsComponent {
     });
   }
 
-  constructor(private route: ActivatedRoute, private cardServ: CardService,public dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private cardServ: CardService, private dialog: MatDialog) {
     this.id = this.route.snapshot.params['id'];
 
     this.cardServ.getProducts().subscribe((prod) => {

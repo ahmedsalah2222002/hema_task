@@ -1,0 +1,38 @@
+<form [formGroup]="updateProductForm" (ngSubmit)="onSubmit()" class="container mt-5">
+  <div class="cont text-center bg-light rounded-4 shadow p-5 mx-auto">
+    <h3 class="mb-4 fs-2 fw-bold text-primary">Update Product</h3>
+
+    <div class="mb-4 text-start">
+      <label class="form-label fs-5 fw-bold" for="name">Name:</label>
+      <input id="name" type="text" formControlName="name" placeholder="Enter your name" class="form-control form-control-lg">
+    </div>
+
+
+    <div class="mb-4 text-start">
+      <label class="form-label fs-5 fw-bold" for="pass">price:</label>
+      <input id="pass" type="price" formControlName="price" placeholder="price" class="form-control form-control-lg">
+
+    </div>
+
+        <div class="mb-4 text-start">
+      <label class="form-label fs-5 fw-bold" for="pass">description:</label>
+      <input id="pass" type="price" formControlName="description" placeholder="description" class="form-control form-control-lg">
+    </div>
+
+    <div class="mb-3">
+      <img [src]="'http://localhost:3000' + data.image" class="card-img-top w-50 mx-auto rounded-4" alt="{{ data.name }}">
+      <label for="image" class="form-label fs-5"> Image: </label>
+      <input type="file" id="image" multiple accept="image/*" #image (change)="onFileSelected($event)"
+        class="form-control form-control-lg">
+    </div>
+
+  <button
+  type="submit"
+  class="btn w-100 p-3  fs-5 fw-bold"
+  [disabled]="updateProductForm.invalid"
+  [ngClass]="updateProductForm.invalid ? ' btn-dark' : 'btn-primary'">
+  Update
+</button>
+
+  </div>
+</form>

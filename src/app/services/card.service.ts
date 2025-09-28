@@ -19,7 +19,7 @@ export class CardService  {
     return this.http.post<unknown>("http://localhost:3000/users",data)
   }
 
-  login(user: User) {
+  login(user: Partial<User>) {
     return this.http.post<unknown>("http://localhost:3000/login", {
       name: user.name,
       password:user.password
