@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CardService } from '../../services/card.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-product-details',
@@ -11,8 +13,21 @@ import { CardService } from '../../services/card.service';
 export class ProductDetailsComponent {
   id: any = '';
   productDetails: any = []
+ animal: string=""
+  name: string=""
 
-  constructor(private route: ActivatedRoute, private cardServ: CardService) {
+  openDialog(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+      data: {name: this.name, password: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+  constructor(private route: ActivatedRoute, private cardServ: CardService,public dialog: MatDialog) {
     this.id = this.route.snapshot.params['id'];
 
     this.cardServ.getProducts().subscribe((prod) => {

@@ -7,6 +7,7 @@ import {
 import { passwordMatchValidator } from '../../passMatchValidator';
 import { Router } from '@angular/router';
 import { CardService } from '../../services/card.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export const TOKEN = 'token';
 
@@ -24,12 +25,13 @@ export class LoginComponent {
     name: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
-
+constructor( public dialogRef: MatDialogRef<LoginComponent>) {}
   onSubmit() {
     if (this.LoginForm.valid) {
       this.cardServ.login(this.LoginForm.value).subscribe({              //nonullableFormBuilder//
 
         next: (res) => {
+          this.dialogRef.close()
           localStorage.setItem(TOKEN, JSON.stringify(this.LoginForm.value));
           this.router.navigate(['/prod']);
         },
